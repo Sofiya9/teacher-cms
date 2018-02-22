@@ -64,10 +64,15 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
-    {
-        //
-    }
+     public function edit(Category $category)
+ {
+     return view('admin.categories.edit', [
+       'category'   => $category,
+       'categories' => Category::with('children')->where('parent_id', '0')->get(),
+       'delimiter'  => ''
+       ]);
+ }
+
 
     /**
      * Update the specified resource in storage.
@@ -76,10 +81,12 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
-    {
-        //
-    }
+     public function update(Request $request, Category $category)
+     {
+         $category->update($request->except('slug'));
+         return redirect()->route('admin.category.index');
+     }
+
 
     /**
      * Remove the specified resource from storage.

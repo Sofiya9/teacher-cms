@@ -20,16 +20,17 @@
       <th class="text-right">Действие</th>
     </thead>
     <tbody>
-      @forelse ($categories as $category)
-        <tr>
-          <td>{{$category->title}}</td>
-          <td>{{$category->published}}</td>
-          <td>
-            <a href="{{route('admin.category.edit', ['id'=>$category->id])}}">
-              <i class="fa fa-edit"></i>
-            </a>
-          </td>
-        </tr>
+        @forelse ($categories as $category)
+             <tr>
+               <td>{{$category->title}}</td>
+               <td>{{$category->published}}</td>
+               <td class="text-right">
+                 <a href="{{route('admin.category.edit', $category->id)}}">
+                   <i class="fa fa-edit"></i>
+                 </a>
+               </td>
+             </tr>
+
       @empty
         <tr>
           <td colspan="3" class="text-center"><h2>Данные отсутствуют</h2></td>
