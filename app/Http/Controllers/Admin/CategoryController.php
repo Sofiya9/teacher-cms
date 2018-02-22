@@ -27,7 +27,11 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create', [
+           'category'   => [],
+           'categories' => Category::with('children')->where('parent_id', '0')->get(),
+           'delimiter'  => ''
+        ]);
     }
 
     /**
@@ -36,18 +40,20 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+     public function store(Request $request)
     {
-        //
+        Category::create($request->all());
+        return redirect()->route('admin.category.index');
     }
+
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Categoryq  $categoryq
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Categoryq $categoryq)
+    public function show(Category $category)
     {
         //
     }
@@ -55,10 +61,10 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Categoryq  $categoryq
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categoryq $categoryq)
+    public function edit(Category $category)
     {
         //
     }
@@ -67,10 +73,10 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Categoryq  $categoryq
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categoryq $categoryq)
+    public function update(Request $request, Category $category)
     {
         //
     }
@@ -78,10 +84,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Categoryq  $categoryq
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categoryq $categoryq)
+    public function destroy(Category $category)
     {
         //
     }
