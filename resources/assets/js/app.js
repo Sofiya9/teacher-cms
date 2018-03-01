@@ -5,9 +5,16 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+ require('./bootstrap');
 
-window.Vue = require('vue');
+ // CKEDITOR
+ $( document ).ready(function() {
+   CKEDITOR.replace( 'description_short' );
+   CKEDITOR.replace( 'description' );
+ });
+
+ window.Vue = require('vue');
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
