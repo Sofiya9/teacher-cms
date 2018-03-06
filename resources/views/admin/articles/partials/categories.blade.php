@@ -21,7 +21,7 @@
     @include('admin.articles.partials.categories', [
       'categories' => $category->children,
       'delimiter'  => ' - ' . $delimiter
-    ])
-
+     ])
+ 
   @endif
-@endforeach
+ @endforeach
