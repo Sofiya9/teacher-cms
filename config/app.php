@@ -178,6 +178,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        /*
+         * Own Service Providers...
+         */
+         App\Providers\BlogServiceProvider::class,
 
     ],
 
