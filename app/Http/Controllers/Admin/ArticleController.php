@@ -105,8 +105,11 @@ class ArticleController extends Controller
       * @param  \App\Article  $article
       * @return \Illuminate\Http\Response
       */
-     public function destroy(Article $article)
-     {
-         //
-     }
+      public function destroy(Article $article)
+      {
+          $article->categories()->detach();
+          $article->delete();
+          return redirect()->route('admin.article.index');
+      }
+
  }
