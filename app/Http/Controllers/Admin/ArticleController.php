@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-  
+
 use App\Article;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-  
+
 class ArticleController extends Controller
 {
      /**
@@ -20,7 +20,7 @@ class ArticleController extends Controller
            'articles' => Article::orderBy('created_at', 'desc')->paginate(10)
          ]);
      }
- 
+
      /**
       * Show the form for creating a new resource.
       *
@@ -35,7 +35,7 @@ class ArticleController extends Controller
            'delimiter'  => ''
          ]);
       }
-  
+
       /**
       * Store a newly created resource in storage.
       *
@@ -52,7 +52,7 @@ class ArticleController extends Controller
         }
          return redirect()->route('admin.article.index');
       }
-  
+
       /**
       * Display the specified resource.
       *
@@ -63,18 +63,23 @@ class ArticleController extends Controller
      {
          //
      }
- 
+
      /**
       * Show the form for editing the specified resource.
       *
       * @param  \App\Article  $article
       * @return \Illuminate\Http\Response
       */
-     public function edit(Article $article)
+      public function edit(Article $article)
      {
-         //
+         return view('admin.articles.edit', [
+           'article'    => $article,
+           'categories' => Category::with('children')->where('parent_id', 0)->get(),
+           'delimiter'  => ''
+         ]);
      }
- 
+
+
      /**
       * Update the specified resource in storage.
       *
@@ -82,11 +87,18 @@ class ArticleController extends Controller
       * @param  \App\Article  $article
       * @return \Illuminate\Http\Response
       */
-     public function update(Request $request, Article $article)
-     {
-         //
-     }
- 
+      public function update(Request $request, Article $article)
+      {
+          $article->update($request->except('slug'));
+          // Categories
+          $article->categories()->detach();
+          if ($request->input('categories')) {
+              $article->categories()->attach($request->input('categories'));
+          }
+          return redirect()->route('admin.article.index');
+      }
+
+
      /**
       * Remove the specified resource from storage.
       *
