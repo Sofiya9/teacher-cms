@@ -986,6 +986,10 @@ $(document).ready(function () {
 });
 
 window.Vue = __webpack_require__(35);
+// CKEDITOR for Page
+$(document).ready(function () {
+  CKEDITOR.replace('description_page');
+});
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

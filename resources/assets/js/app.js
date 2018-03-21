@@ -14,6 +14,10 @@
  });
 
  window.Vue = require('vue');
+// CKEDITOR for Page
+$( document ).ready(function() {
+  CKEDITOR.replace( 'description_page' );
+});
 
 
 /**
